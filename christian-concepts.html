@@ -1,0 +1,1788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Essential Christian Concepts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f5f6fa;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .concept-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .concept-card.active {
+            border: 2px solid #3498db;
+        }
+
+        .concept-title {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .concept-description {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .key-points-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .key-point {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .key-point:before {
+            content: "•";
+            color: #3498db;
+            position: absolute;
+            left: 0;
+        }
+
+        .bible-verse {
+            font-style: italic;
+            color: #7f8c8d;
+            border-left: 4px solid #3498db;
+            padding-left: 1rem;
+            margin: 1rem 0;
+        }
+
+        .quiz-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .quiz-title {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .quiz-question {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .quiz-option {
+            padding: 0.75rem 1rem;
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .quiz-option:hover {
+            background: #e9ecef;
+        }
+
+        .quiz-option.correct {
+            background: #d4edda;
+            border-color: #c3e6cb;
+        }
+
+        .quiz-option.incorrect {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+        }
+
+        .quiz-explanation {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+
+        .quiz-result {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .quiz-result.success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .quiz-result.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .quiz-button {
+            display: block;
+            margin: 1.5rem auto;
+            padding: 0.75rem 1.5rem;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+
+        .quiz-button:hover {
+            background: #2980b9;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: #eee;
+            border-radius: 5px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #3498db;
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .nav-button {
+            padding: 0.5rem 1rem;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .nav-button:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+
+        .review-section {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .review-title {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .review-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .review-question {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .review-answer {
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            background: #e9ecef;
+            border-radius: 5px;
+        }
+
+        .review-explanation {
+            margin-top: 0.5rem;
+            font-style: italic;
+            color: #666;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-title {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .modal-close {
+            float: right;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #7f8c8d;
+        }
+
+        .modal-close:hover {
+            color: #2c3e50;
+        }
+
+        .concept-details {
+            margin-top: 1rem;
+        }
+
+        .concept-details p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .concept-details ul {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+
+        .concept-details li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1rem;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .toggle-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 0.5rem;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .dark-mode {
+            background: #1a1a2e;
+            color: #f5f6fa;
+        }
+
+        .dark-mode .concept-card {
+            background: #16213e;
+            color: #f5f6fa;
+        }
+
+        .dark-mode .concept-title {
+            color: #f5f6fa;
+        }
+
+        .dark-mode .concept-description {
+            color: #bdc3c7;
+        }
+
+        .dark-mode .quiz-section {
+            background: #16213e;
+        }
+
+        .dark-mode .quiz-title {
+            color: #f5f6fa;
+        }
+
+        .dark-mode .quiz-option {
+            background: #0f3460;
+            border-color: #1a1a2e;
+            color: #f5f6fa;
+        }
+
+        .dark-mode .quiz-option:hover {
+            background: #16213e;
+        }
+
+        .dark-mode .modal-content {
+            background: #16213e;
+            color: #f5f6fa;
+        }
+
+        .dark-mode .modal-title {
+            color: #f5f6fa;
+        }
+
+        .dark-mode .modal-close {
+            color: #bdc3c7;
+        }
+
+        .dark-mode .modal-close:hover {
+            color: #f5f6fa;
+        }
+
+        .dark-mode .footer {
+            color: #bdc3c7;
+        }
+
+        /* Struggles Section Styles */
+        .struggles-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .struggles-title {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .struggles-description {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #666;
+        }
+
+        .struggles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .struggle-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.3s;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .struggle-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .struggle-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #3498db;
+        }
+
+        .struggle-title {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .struggle-brief {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .struggle-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .struggle-modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .struggle-modal-title {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .struggle-modal-close {
+            float: right;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #7f8c8d;
+        }
+
+        .struggle-modal-close:hover {
+            color: #2c3e50;
+        }
+
+        .struggle-content {
+            margin-top: 1rem;
+        }
+
+        .struggle-content p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .struggle-content h3 {
+            color: #2c3e50;
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        .struggle-content ul {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+
+        .struggle-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .bible-verse-highlight {
+            font-style: italic;
+            color: #7f8c8d;
+            border-left: 4px solid #3498db;
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 5px;
+        }
+
+        .prayer-suggestion {
+            background: #e8f4f8;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+            font-style: italic;
+        }
+
+        .dark-mode .struggles-section {
+            background: #16213e;
+        }
+
+        .dark-mode .struggles-title {
+            color: #f5f6fa;
+        }
+
+        .dark-mode .struggles-description {
+            color: #bdc3c7;
+        }
+
+        .dark-mode .struggle-card {
+            background: #0f3460;
+            color: #f5f6fa;
+        }
+
+        .dark-mode .struggle-title {
+            color: #f5f6fa;
+        }
+
+        .dark-mode .struggle-brief {
+            color: #bdc3c7;
+        }
+
+        .dark-mode .struggle-modal-content {
+            background: #16213e;
+            color: #f5f6fa;
+        }
+
+        .dark-mode .struggle-modal-title {
+            color: #f5f6fa;
+        }
+
+        .dark-mode .struggle-modal-close {
+            color: #bdc3c7;
+        }
+
+        .dark-mode .struggle-modal-close:hover {
+            color: #f5f6fa;
+        }
+
+        .dark-mode .struggle-content h3 {
+            color: #f5f6fa;
+        }
+
+        .dark-mode .bible-verse-highlight {
+            background: #0f3460;
+            color: #bdc3c7;
+        }
+
+        .dark-mode .prayer-suggestion {
+            background: #0f3460;
+            color: #bdc3c7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Essential Christian Concepts</h1>
+            <p>Learn the fundamental truths of Christianity through interactive lessons</p>
+        </header>
+
+        <div class="concept-grid">
+            <div class="concept-card" data-concept="1">
+                <h2 class="concept-title">God's Love and Creation</h2>
+                <p class="concept-description">God created everything out of love and made humans in His image.</p>
+                <ul class="key-points-list">
+                    <li class="key-point">God is the Creator of everything</li>
+                    <li class="key-point">Humans are made in God's image</li>
+                    <li class="key-point">God's love is unconditional</li>
+                    <li class="key-point">Creation reflects God's glory</li>
+                </ul>
+                <blockquote class="bible-verse">"For God so loved the world, that he gave his only Son..." - John 3:16</blockquote>
+                <button class="toggle-button">Learn More</button>
+            </div>
+
+            <div class="concept-card" data-concept="2">
+                <h2 class="concept-title">The Fall of Man and Sin</h2>
+                <p class="concept-description">Through Adam and Eve's disobedience, sin entered the world.</p>
+                <ul class="key-points-list">
+                    <li class="key-point">Original sin affects all humanity</li>
+                    <li class="key-point">Sin separates us from God</li>
+                    <li class="key-point">God's law reveals our sin</li>
+                    <li class="key-point">We need a Savior</li>
+                </ul>
+                <blockquote class="bible-verse">"For all have sinned and fall short of the glory of God" - Romans 3:23</blockquote>
+                <button class="toggle-button">Learn More</button>
+            </div>
+
+            <div class="concept-card" data-concept="3">
+                <h2 class="concept-title">Jesus Christ</h2>
+                <p class="concept-description">God's Son who came to earth, died for our sins, and rose again.</p>
+                <ul class="key-points-list">
+                    <li class="key-point">Jesus is fully God and fully man</li>
+                    <li class="key-point">He lived a perfect life</li>
+                    <li class="key-point">He died for our sins</li>
+                    <li class="key-point">He rose from the dead</li>
+                </ul>
+                <blockquote class="bible-verse">"I am the way, and the truth, and the life" - John 14:6</blockquote>
+                <button class="toggle-button">Learn More</button>
+            </div>
+
+            <div class="concept-card" data-concept="4">
+                <h2 class="concept-title">Salvation through Faith</h2>
+                <p class="concept-description">We are saved by grace through faith in Jesus Christ.</p>
+                <ul class="key-points-list">
+                    <li class="key-point">Salvation is a gift from God</li>
+                    <li class="key-point">We can't earn salvation</li>
+                    <li class="key-point">Faith in Jesus saves us</li>
+                    <li class="key-point">Good works follow salvation</li>
+                </ul>
+                <blockquote class="bible-verse">"For by grace you have been saved through faith" - Ephesians 2:8</blockquote>
+                <button class="toggle-button">Learn More</button>
+            </div>
+
+            <div class="concept-card" data-concept="5">
+                <h2 class="concept-title">The Holy Spirit</h2>
+                <p class="concept-description">The third person of the Trinity who indwells believers and empowers them.</p>
+                <ul class="key-points-list">
+                    <li class="key-point">The Holy Spirit is God</li>
+                    <li class="key-point">He indwells all believers</li>
+                    <li class="key-point">He convicts of sin</li>
+                    <li class="key-point">He produces spiritual fruit</li>
+                </ul>
+                <blockquote class="bible-verse">"But the fruit of the Spirit is love, joy, peace, patience, kindness, goodness, faithfulness, gentleness, self-control" - Galatians 5:22-23</blockquote>
+                <button class="toggle-button">Learn More</button>
+            </div>
+
+            <div class="concept-card" data-concept="6">
+                <h2 class="concept-title">The Bible</h2>
+                <p class="concept-description">God's inspired and authoritative Word given to guide and instruct believers.</p>
+                <ul class="key-points-list">
+                    <li class="key-point">The Bible is God's Word</li>
+                    <li class="key-point">It is inspired and inerrant</li>
+                    <li class="key-point">It is our authority for faith and practice</li>
+                    <li class="key-point">It reveals God's character and plan</li>
+                </ul>
+                <blockquote class="bible-verse">"All Scripture is breathed out by God and profitable for teaching, for reproof, for correction, and for training in righteousness" - 2 Timothy 3:16</blockquote>
+                <button class="toggle-button">Learn More</button>
+            </div>
+
+            <div class="concept-card" data-concept="7">
+                <h2 class="concept-title">Prayer</h2>
+                <p class="concept-description">Communication with God that builds relationship and brings His will to earth.</p>
+                <ul class="key-points-list">
+                    <li class="key-point">Prayer is conversation with God</li>
+                    <li class="key-point">Jesus modeled prayer for us</li>
+                    <li class="key-point">Prayer includes praise, confession, thanksgiving, and supplication</li>
+                    <li class="key-point">God answers prayer according to His will</li>
+                </ul>
+                <blockquote class="bible-verse">"Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God" - Philippians 4:6</blockquote>
+                <button class="toggle-button">Learn More</button>
+            </div>
+
+            <div class="concept-card" data-concept="8">
+                <h2 class="concept-title">The Church</h2>
+                <p class="concept-description">The community of believers united by faith in Christ, called to worship and serve together.</p>
+                <ul class="key-points-list">
+                    <li class="key-point">The Church is the body of Christ</li>
+                    <li class="key-point">Believers are called to gather together</li>
+                    <li class="key-point">The Church is built on Christ as the foundation</li>
+                    <li class="key-point">The Church has a mission to make disciples</li>
+                </ul>
+                <blockquote class="bible-verse">"And I tell you that you are Peter, and on this rock I will build my church, and the gates of Hades will not overcome it" - Matthew 16:18</blockquote>
+                <button class="toggle-button">Learn More</button>
+            </div>
+        </div>
+
+        <div class="quiz-section">
+            <h2 class="quiz-title">Test Your Knowledge</h2>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <div id="quiz-container">
+                <!-- Quiz questions will be inserted here by JavaScript -->
+            </div>
+            <button class="quiz-button" id="start-quiz">Start Quiz</button>
+            <div class="navigation">
+                <button class="nav-button" id="prev-question" disabled>Previous</button>
+                <button class="nav-button" id="next-question">Next</button>
+            </div>
+            <div class="review-section" id="review-section">
+                <h3 class="review-title">Review Your Answers</h3>
+                <div id="review-container"></div>
+            </div>
+        </div>
+
+        <div class="struggles-section">
+            <h2 class="struggles-title">Common Struggles in the Christian Life</h2>
+            <p class="struggles-description">Click on a struggle you're facing to receive biblical guidance and practical steps for overcoming it.</p>
+            
+            <div class="struggles-grid">
+                <div class="struggle-card" data-struggle="1">
+                    <div class="struggle-icon">😔</div>
+                    <h3 class="struggle-title">Doubt</h3>
+                    <p class="struggle-brief">Questioning your faith or God's existence</p>
+                </div>
+                
+                <div class="struggle-card" data-struggle="2">
+                    <div class="struggle-icon">😡</div>
+                    <h3 class="struggle-title">Anger</h3>
+                    <p class="struggle-brief">Struggling with anger and forgiveness</p>
+                </div>
+                
+                <div class="struggle-card" data-struggle="3">
+                    <div class="struggle-icon">😴</div>
+                    <h3 class="struggle-title">Spiritual Apathy</h3>
+                    <p class="struggle-brief">Losing passion for God and spiritual things</p>
+                </div>
+                
+                <div class="struggle-card" data-struggle="4">
+                    <div class="struggle-icon">😰</div>
+                    <h3 class="struggle-title">Anxiety</h3>
+                    <p class="struggle-brief">Worry and fear about the future</p>
+                </div>
+                
+                <div class="struggle-card" data-struggle="5">
+                    <div class="struggle-icon">😔</div>
+                    <h3 class="struggle-title">Guilt</h3>
+                    <p class="struggle-brief">Overwhelmed by past mistakes</p>
+                </div>
+                
+                <div class="struggle-card" data-struggle="6">
+                    <div class="struggle-icon">😞</div>
+                    <h3 class="struggle-title">Loneliness</h3>
+                    <p class="struggle-brief">Feeling disconnected from God and others</p>
+                </div>
+                
+                <div class="struggle-card" data-struggle="7">
+                    <div class="struggle-icon">😤</div>
+                    <h3 class="struggle-title">Pride</h3>
+                    <p class="struggle-brief">Struggling with self-righteousness</p>
+                </div>
+                
+                <div class="struggle-card" data-struggle="8">
+                    <div class="struggle-icon">😫</div>
+                    <h3 class="struggle-title">Burnout</h3>
+                    <p class="struggle-brief">Exhausted from ministry or service</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="struggle-modal" id="struggle-modal">
+            <div class="struggle-modal-content">
+                <span class="struggle-modal-close">&times;</span>
+                <h2 class="struggle-modal-title" id="struggle-modal-title"></h2>
+                <div class="struggle-content" id="struggle-modal-content"></div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Essential Christian Concepts - A simple guide to understanding the core truths of Christianity</p>
+        </div>
+    </div>
+
+    <div class="modal" id="concept-modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2 class="modal-title" id="modal-title"></h2>
+            <div class="concept-details" id="modal-content"></div>
+        </div>
+    </div>
+
+    <script>
+        // Concept details for the modal
+        const conceptDetails = {
+            1: {
+                title: "God's Love and Creation",
+                content: `
+                    <p>The concept of God's love and creation is foundational to Christian theology. The Bible begins with the story of creation in Genesis, where God creates the universe, the earth, and all living things out of nothing.</p>
+                    <p>God's creation of humanity is unique, as humans alone are created in God's image (Genesis 1:27). This means we reflect God's character and have the capacity for relationship with Him.</p>
+                    <p>God's love is demonstrated throughout Scripture, but perhaps most clearly in John 3:16: "For God so loved the world, that he gave his only Son, that whoever believes in him should not perish but have eternal life."</p>
+                    <p>Key aspects of God's creation and love include:</p>
+                    <ul>
+                        <li>Creation ex nihilo (out of nothing)</li>
+                        <li>Creation as an act of God's love and wisdom</li>
+                        <li>Humans as the crown of creation, made in God's image</li>
+                        <li>The goodness of creation (God saw that it was good)</li>
+                        <li>God's ongoing care and provision for His creation</li>
+                    </ul>
+                    <p>Understanding God as Creator helps us recognize our dependence on Him and our responsibility to steward His creation well.</p>
+                `
+            },
+            2: {
+                title: "The Fall of Man and Sin",
+                content: `
+                    <p>The Fall of Man refers to the biblical account of Adam and Eve's disobedience in the Garden of Eden, which brought sin and death into the world.</p>
+                    <p>In Genesis 3, we read how the serpent deceived Eve, and both Adam and Eve ate the forbidden fruit from the tree of the knowledge of good and evil, despite God's command not to do so.</p>
+                    <p>The consequences of this original sin were severe:</p>
+                    <ul>
+                        <li>Separation from God (spiritual death)</li>
+                        <li>Physical death entering the world</li>
+                        <li>Broken relationships between humans</li>
+                        <li>Curse on creation</li>
+                        <li>Sin nature passed down to all humanity</li>
+                    </ul>
+                    <p>Romans 5:12 explains: "Therefore, just as sin entered the world through one man, and death through sin, and in this way death came to all people, because all sinned."</p>
+                    <p>The Fall explains the brokenness we see in the world and in ourselves. It shows us our need for a Savior who can reconcile us to God and restore what was lost.</p>
+                `
+            },
+            3: {
+                title: "Jesus Christ",
+                content: `
+                    <p>Jesus Christ is the central figure of Christianity. He is both fully God and fully man, a concept known as the Incarnation.</p>
+                    <p>The New Testament reveals Jesus as the Son of God who came to earth to save humanity from sin. His life, death, and resurrection are the foundation of the Christian faith.</p>
+                    <p>Key aspects of Jesus' identity and work include:</p>
+                    <ul>
+                        <li>His pre-existence as God (John 1:1-3)</li>
+                        <li>His virgin birth (Matthew 1:18-25)</li>
+                        <li>His sinless life (Hebrews 4:15)</li>
+                        <li>His miracles and teaching ministry</li>
+                        <li>His sacrificial death on the cross</li>
+                        <li>His bodily resurrection from the dead</li>
+                        <li>His ascension to heaven</li>
+                        <li>His future return to judge the living and the dead</li>
+                    </ul>
+                    <p>Jesus' death on the cross is understood as a substitutionary atonement - He took the punishment for our sins so that we could be forgiven and reconciled to God.</p>
+                    <p>His resurrection demonstrates God's power over death and validates His claims about Himself. It is the foundation of the Christian hope for eternal life.</p>
+                `
+            },
+            4: {
+                title: "Salvation through Faith",
+                content: `
+                    <p>Salvation is the deliverance from sin and its consequences, including eternal separation from God. In Christian theology, salvation is understood as a gift from God received through faith in Jesus Christ.</p>
+                    <p>Ephesians 2:8-9 clearly states: "For it is by grace you have been saved, through faith—and not from yourselves, it is the gift of God—not by works, so that no one can boast."</p>
+                    <p>Key aspects of salvation include:</p>
+                    <ul>
+                        <li>Salvation is by grace alone (God's unmerited favor)</li>
+                        <li>Salvation is received through faith alone (trust in Christ)</li>
+                        <li>Salvation is in Christ alone (no other way to God)</li>
+                        <li>Salvation results in good works (not to earn salvation but as a response to it)</li>
+                        <li>Salvation includes both justification (being declared righteous) and sanctification (being made holy)</li>
+                    </ul>
+                    <p>The process of salvation involves:</p>
+                    <ul>
+                        <li>Conviction of sin by the Holy Spirit</li>
+                        <li>Repentance (turning from sin)</li>
+                        <li>Faith in Jesus Christ</li>
+                        <li>Regeneration (new birth)</li>
+                        <li>Adoption into God's family</li>
+                    </ul>
+                    <p>Salvation is both a one-time event (justification) and an ongoing process (sanctification) in the life of a believer.</p>
+                `
+            },
+            5: {
+                title: "The Holy Spirit",
+                content: `
+                    <p>The Holy Spirit is the third person of the Trinity, equal in deity with God the Father and God the Son. He is not merely a force or power but a personal being who indwells believers.</p>
+                    <p>The Holy Spirit's work in the Old Testament was primarily selective and temporary, but in the New Testament, He indwells all believers permanently.</p>
+                    <p>Key aspects of the Holy Spirit's work include:</p>
+                    <ul>
+                        <li>He inspired the writers of Scripture (2 Peter 1:21)</li>
+                        <li>He convicts the world of sin, righteousness, and judgment (John 16:8)</li>
+                        <li>He regenerates believers (Titus 3:5)</li>
+                        <li>He indwells all believers (1 Corinthians 6:19)</li>
+                        <li>He seals believers for the day of redemption (Ephesians 1:13-14)</li>
+                        <li>He produces spiritual fruit in believers (Galatians 5:22-23)</li>
+                        <li>He gives spiritual gifts to believers (1 Corinthians 12:4-11)</li>
+                        <li>He guides believers into truth (John 16:13)</li>
+                    </ul>
+                    <p>The Holy Spirit's presence in a believer's life is evidenced by the fruit of the Spirit: love, joy, peace, patience, kindness, goodness, faithfulness, gentleness, and self-control.</p>
+                    <p>Understanding the Holy Spirit's role helps believers recognize His work in their lives and rely on His power for living the Christian life.</p>
+                `
+            },
+            6: {
+                title: "The Bible",
+                content: `
+                    <p>The Bible is the inspired and authoritative Word of God, given to guide and instruct believers in faith and practice.</p>
+                    <p>2 Timothy 3:16-17 states: "All Scripture is God-breathed and is useful for teaching, rebuking, correcting and training in righteousness, so that the servant of God may be thoroughly equipped for every good work."</p>
+                    <p>Key aspects of the Bible include:</p>
+                    <ul>
+                        <li>Inspiration - God breathed out His words through human authors</li>
+                        <li>Inerrancy - The Bible is without error in its original manuscripts</li>
+                        <li>Authority - The Bible is the final authority for faith and practice</li>
+                        <li>Sufficiency - The Bible contains everything needed for salvation and godly living</li>
+                        <li>Unity - The Bible is one cohesive story from Genesis to Revelation</li>
+                    </ul>
+                    <p>The Bible consists of 66 books divided into the Old Testament (39 books) and the New Testament (27 books). It was written by approximately 40 authors over a period of 1,500 years, yet maintains a consistent message throughout.</p>
+                    <p>The central theme of the Bible is God's plan of redemption through Jesus Christ, which is foreshadowed in the Old Testament and fulfilled in the New Testament.</p>
+                    <p>Understanding the Bible as God's Word helps believers recognize its authority in their lives and rely on it for guidance, instruction, and encouragement.</p>
+                `
+            },
+            7: {
+                title: "Prayer",
+                content: `
+                    <p>Prayer is the means by which believers communicate with God. It is not merely a religious ritual but a vital aspect of the Christian life that builds relationship with God.</p>
+                    <p>Jesus modeled prayer throughout His ministry, often withdrawing to solitary places to pray (Luke 5:16). He also taught His disciples how to pray, giving them what is known as the Lord's Prayer (Matthew 6:9-13).</p>
+                    <p>Key aspects of prayer include:</p>
+                    <ul>
+                        <li>Praise - Acknowledging God's character and attributes</li>
+                        <li>Confession - Admitting sin and asking for forgiveness</li>
+                        <li>Thanksgiving - Expressing gratitude for God's blessings</li>
+                        <li>Supplication - Making requests for oneself and others</li>
+                    </ul>
+                    <p>The Bible teaches that prayer should be:</p>
+                    <ul>
+                        <li>Persistent (Luke 18:1-8)</li>
+                        <li>Faith-filled (James 1:6)</li>
+                        <li>According to God's will (1 John 5:14-15)</li>
+                        <li>In Jesus' name (John 14:13-14)</li>
+                        <li>With thanksgiving (Philippians 4:6)</li>
+                    </ul>
+                    <p>Prayer is not about changing God's mind but aligning our hearts with His will. Through prayer, believers experience God's presence, receive guidance, find comfort, and participate in His work in the world.</p>
+                    <p>Understanding prayer as communication with God helps believers develop an intimate relationship with Him and experience the power of His presence in their lives.</p>
+                `
+            },
+            8: {
+                title: "The Church",
+                content: `
+                    <p>The Church is the community of believers united by faith in Jesus Christ. It is not merely a building or an organization but the body of Christ, of which He is the head.</p>
+                    <p>Ephesians 1:22-23 describes the Church as Christ's body, "the fullness of him who fills everything in every way." This imagery emphasizes the intimate connection between Christ and His followers.</p>
+                    <p>Key aspects of the Church include:</p>
+                    <ul>
+                        <li>The Church is built on Christ as the foundation (1 Corinthians 3:11)</li>
+                        <li>Believers are living stones being built into a spiritual house (1 Peter 2:5)</li>
+                        <li>The Church is the bride of Christ (Ephesians 5:25-27)</li>
+                        <li>The Church is the pillar and foundation of the truth (1 Timothy 3:15)</li>
+                        <li>The Church has a mission to make disciples (Matthew 28:19-20)</li>
+                    </ul>
+                    <p>The purposes of the Church include:</p>
+                    <ul>
+                        <li>Worship - Glorifying God through praise and adoration</li>
+                        <li>Fellowship - Building community and supporting one another</li>
+                        <li>Discipleship - Growing in faith and knowledge of Christ</li>
+                        <li>Ministry - Serving others in Christ's name</li>
+                        <li>Evangelism - Sharing the gospel with the world</li>
+                    </ul>
+                    <p>The Church is both universal (all believers throughout time and space) and local (specific gatherings of believers in particular locations).</p>
+                    <p>Understanding the Church as the body of Christ helps believers recognize their connection to other believers and their role in God's plan to reconcile all things to Himself.</p>
+                `
+            }
+        };
+
+        // Quiz questions
+        const quizQuestions = [
+            {
+                question: "What does it mean that humans are created in God's image?",
+                options: [
+                    "We look physically like God",
+                    "We reflect God's character and have the capacity for relationship with Him",
+                    "We have the same abilities as God",
+                    "We are equal to God in power and authority"
+                ],
+                correct: 1,
+                explanation: "Being created in God's image means we reflect His character traits like love, creativity, and moral awareness. It also means we have the unique capacity for a personal relationship with God, unlike any other created being."
+            },
+            {
+                question: "What were the consequences of the Fall of Man?",
+                options: [
+                    "Nothing changed in the world",
+                    "Only Adam and Eve were affected",
+                    "Separation from God, physical death, broken relationships, and sin nature passed to all humanity",
+                    "Only the serpent was punished"
+                ],
+                correct: 2,
+                explanation: "The Fall had far-reaching consequences that affected all of creation. It introduced sin, death, and brokenness into the world. All humans inherit a sin nature, and the entire creation was subjected to decay and futility."
+            },
+            {
+                question: "What does it mean that Jesus is fully God and fully man?",
+                options: [
+                    "He was sometimes God and sometimes man",
+                    "He was half God and half man",
+                    "He was fully divine and fully human simultaneously",
+                    "He was only God pretending to be human"
+                ],
+                correct: 2,
+                explanation: "The doctrine of the Incarnation teaches that Jesus Christ is both fully divine and fully human at the same time. This is a mystery of the faith, but it was necessary for Jesus to be both God (to have the power to save) and man (to represent humanity and die in our place)."
+            },
+            {
+                question: "How are we saved according to Christian teaching?",
+                options: [
+                    "By our good works and moral behavior",
+                    "By being born into a Christian family",
+                    "By grace through faith in Jesus Christ",
+                    "By following religious rituals and ceremonies"
+                ],
+                correct: 2,
+                explanation: "Salvation is a gift from God that cannot be earned. It is received by grace (God's unmerited favor) through faith (trust) in Jesus Christ. Good works and religious rituals are a response to salvation, not the means of earning it."
+            },
+            {
+                question: "What is the role of the Holy Spirit in a believer's life?",
+                options: [
+                    "He only appears on special occasions",
+                    "He indwells believers, convicts of sin, produces spiritual fruit, and gives spiritual gifts",
+                    "He only works through church leaders",
+                    "He is no longer active in the world today"
+                ],
+                correct: 1,
+                explanation: "The Holy Spirit is actively involved in every believer's life. He lives within us, helps us understand God's Word, convicts us of sin, produces Christ-like character (fruit), and equips us with spiritual gifts to serve others."
+            },
+            {
+                question: "What does it mean that the Bible is inspired?",
+                options: [
+                    "It was written by especially talented human authors",
+                    "It contains good moral teachings but is not divine",
+                    "God breathed out the words through human authors",
+                    "It was dictated word for word by God to the authors"
+                ],
+                correct: 2,
+                explanation: "Biblical inspiration means that God breathed out His words through human authors. While the authors used their own writing styles and experiences, God superintended the process to ensure that what was written was exactly what He wanted to communicate."
+            },
+            {
+                question: "What are the key components of prayer according to Christian teaching?",
+                options: [
+                    "Only asking for things we want",
+                    "Praise, confession, thanksgiving, and supplication",
+                    "Reciting memorized prayers only",
+                    "Praying only in church buildings"
+                ],
+                correct: 1,
+                explanation: "Prayer is a multifaceted conversation with God that includes praising Him for who He is, confessing our sins, thanking Him for His blessings, and making requests (supplication). This model is demonstrated in the Lord's Prayer and throughout Scripture."
+            },
+            {
+                question: "What is the Church according to Christian theology?",
+                options: [
+                    "Just a building where Christians meet",
+                    "A religious organization with rules and regulations",
+                    "The community of believers united by faith in Christ",
+                    "Only the church leaders and pastors"
+                ],
+                correct: 2,
+                explanation: "The Church is not a building or organization but the community of all believers throughout time and space who are united by their faith in Jesus Christ. It is described as the body of Christ, with Christ as the head and all believers as members."
+            }
+        ];
+
+        // DOM Elements
+        const conceptCards = document.querySelectorAll('.concept-card');
+        const modal = document.getElementById('concept-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalContent = document.getElementById('modal-content');
+        const closeModal = document.querySelector('.modal-close');
+        const quizContainer = document.getElementById('quiz-container');
+        const startQuizButton = document.getElementById('start-quiz');
+        const prevButton = document.getElementById('prev-question');
+        const nextButton = document.getElementById('next-question');
+        const progressFill = document.querySelector('.progress-fill');
+        const body = document.body;
+        const reviewSection = document.getElementById('review-section');
+        const reviewContainer = document.getElementById('review-container');
+
+        // Variables
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let quizStarted = false;
+        let userAnswers = [];
+
+        // Event Listeners
+        conceptCards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                if (e.target.classList.contains('toggle-button')) {
+                    const conceptId = this.getAttribute('data-concept');
+                    openModal(conceptId);
+                }
+            });
+        });
+
+        closeModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        startQuizButton.addEventListener('click', startQuiz);
+        prevButton.addEventListener('click', showPreviousQuestion);
+        nextButton.addEventListener('click', showNextQuestion);
+
+        // Functions
+        function openModal(conceptId) {
+            const concept = conceptDetails[conceptId];
+            modalTitle.textContent = concept.title;
+            modalContent.innerHTML = concept.content;
+            modal.style.display = 'flex';
+        }
+
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            quizStarted = true;
+            userAnswers = [];
+            startQuizButton.style.display = 'none';
+            reviewSection.style.display = 'none';
+            showQuestion();
+            updateNavigationButtons();
+        }
+
+        function showQuestion() {
+            const question = quizQuestions[currentQuestionIndex];
+            let html = `
+                <div class="quiz-question">
+                    <h3>${question.question}</h3>
+                    <div class="quiz-options">
+            `;
+
+            question.options.forEach((option, index) => {
+                html += `<div class="quiz-option" data-index="${index}">${option}</div>`;
+            });
+
+            html += `
+                    </div>
+                    <div class="quiz-explanation" style="display: none;">
+                        <p>${question.explanation}</p>
+                    </div>
+                </div>
+            `;
+
+            quizContainer.innerHTML = html;
+            progressFill.style.width = `${((currentQuestionIndex + 1) / quizQuestions.length) * 100}%`;
+
+            const options = document.querySelectorAll('.quiz-option');
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    const selectedIndex = parseInt(this.getAttribute('data-index'));
+                    checkAnswer(selectedIndex);
+                });
+            });
+        }
+
+        function checkAnswer(selectedIndex) {
+            const question = quizQuestions[currentQuestionIndex];
+            const options = document.querySelectorAll('.quiz-option');
+            const explanation = document.querySelector('.quiz-explanation');
+            
+            options.forEach(option => {
+                option.style.pointerEvents = 'none';
+            });
+
+            userAnswers[currentQuestionIndex] = selectedIndex;
+
+            if (selectedIndex === question.correct) {
+                options[selectedIndex].classList.add('correct');
+                score++;
+            } else {
+                options[selectedIndex].classList.add('incorrect');
+                options[question.correct].classList.add('correct');
+            }
+
+            explanation.style.display = 'block';
+
+            if (currentQuestionIndex === quizQuestions.length - 1) {
+                nextButton.textContent = 'See Results';
+            }
+        }
+
+        function showPreviousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                showQuestion();
+                updateNavigationButtons();
+                
+                // Restore previous answer if it exists
+                if (userAnswers[currentQuestionIndex] !== undefined) {
+                    const options = document.querySelectorAll('.quiz-option');
+                    const selectedIndex = userAnswers[currentQuestionIndex];
+                    const question = quizQuestions[currentQuestionIndex];
+                    
+                    options.forEach(option => {
+                        option.style.pointerEvents = 'none';
+                    });
+                    
+                    if (selectedIndex === question.correct) {
+                        options[selectedIndex].classList.add('correct');
+                    } else {
+                        options[selectedIndex].classList.add('incorrect');
+                        options[question.correct].classList.add('correct');
+                    }
+                    
+                    document.querySelector('.quiz-explanation').style.display = 'block';
+                }
+            }
+        }
+
+        function showNextQuestion() {
+            if (currentQuestionIndex < quizQuestions.length - 1) {
+                currentQuestionIndex++;
+                showQuestion();
+                updateNavigationButtons();
+                
+                // Restore previous answer if it exists
+                if (userAnswers[currentQuestionIndex] !== undefined) {
+                    const options = document.querySelectorAll('.quiz-option');
+                    const selectedIndex = userAnswers[currentQuestionIndex];
+                    const question = quizQuestions[currentQuestionIndex];
+                    
+                    options.forEach(option => {
+                        option.style.pointerEvents = 'none';
+                    });
+                    
+                    if (selectedIndex === question.correct) {
+                        options[selectedIndex].classList.add('correct');
+                    } else {
+                        options[selectedIndex].classList.add('incorrect');
+                        options[question.correct].classList.add('correct');
+                    }
+                    
+                    document.querySelector('.quiz-explanation').style.display = 'block';
+                }
+            } else {
+                showResults();
+            }
+        }
+
+        function updateNavigationButtons() {
+            prevButton.disabled = currentQuestionIndex === 0;
+            nextButton.textContent = currentQuestionIndex === quizQuestions.length - 1 ? 'See Results' : 'Next';
+        }
+
+        function showResults() {
+            const percentage = Math.round((score / quizQuestions.length) * 100);
+            let resultClass = percentage >= 70 ? 'success' : 'error';
+            let resultMessage = percentage >= 70 
+                ? `Congratulations! You scored ${percentage}%! You have a good understanding of these Christian concepts.` 
+                : `You scored ${percentage}%. Keep studying these concepts to deepen your understanding.`;
+
+            quizContainer.innerHTML = `
+                <div class="quiz-result ${resultClass}">
+                    <h3>Quiz Complete!</h3>
+                    <p>${resultMessage}</p>
+                    <p>You got ${score} out of ${quizQuestions.length} questions correct.</p>
+                </div>
+            `;
+
+            nextButton.style.display = 'none';
+            prevButton.style.display = 'none';
+            startQuizButton.textContent = 'Retake Quiz';
+            startQuizButton.style.display = 'block';
+            
+            showReview();
+        }
+
+        function showReview() {
+            reviewSection.style.display = 'block';
+            let reviewHTML = '';
+            
+            quizQuestions.forEach((question, index) => {
+                const userAnswer = userAnswers[index];
+                const isCorrect = userAnswer === question.correct;
+                
+                reviewHTML += `
+                    <div class="review-item">
+                        <div class="review-question">${index + 1}. ${question.question}</div>
+                        <div class="review-answer">
+                            Your answer: ${question.options[userAnswer]}
+                            <span style="color: ${isCorrect ? 'green' : 'red'}">(${isCorrect ? 'Correct' : 'Incorrect'})</span>
+                        </div>
+                        ${!isCorrect ? `<div class="review-answer">Correct answer: ${question.options[question.correct]}</div>` : ''}
+                        <div class="review-explanation">${question.explanation}</div>
+                    </div>
+                `;
+            });
+            
+            reviewContainer.innerHTML = reviewHTML;
+        }
+
+        // Dark mode toggle
+        const darkModeToggle = document.createElement('button');
+        darkModeToggle.textContent = 'Dark Mode';
+        darkModeToggle.style.position = 'fixed';
+        darkModeToggle.style.top = '1rem';
+        darkModeToggle.style.right = '1rem';
+        darkModeToggle.style.padding = '0.5rem 1rem';
+        darkModeToggle.style.background = '#3498db';
+        darkModeToggle.style.color = 'white';
+        darkModeToggle.style.border = 'none';
+        darkModeToggle.style.borderRadius = '5px';
+        darkModeToggle.style.cursor = 'pointer';
+        document.body.appendChild(darkModeToggle);
+
+        darkModeToggle.addEventListener('click', function() {
+            body.classList.toggle('dark-mode');
+            this.textContent = body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
+        });
+
+        // Struggles content
+        const strugglesContent = {
+            1: {
+                title: "Dealing with Doubt",
+                content: `
+                    <p>Doubt is a common experience in the Christian life. Even the most faithful believers have moments of questioning. The good news is that doubt doesn't have to lead to disbelief—it can actually strengthen your faith when approached correctly.</p>
+                    
+                    <h3>Understanding Doubt</h3>
+                    <p>Doubt can take many forms:</p>
+                    <ul>
+                        <li>Intellectual doubt - Questions about the truth of Christianity</li>
+                        <li>Emotional doubt - Feeling disconnected from God</li>
+                        <li>Volitional doubt - Struggling to commit fully to God</li>
+                        <li>Moral doubt - Questioning God's goodness or justice</li>
+                    </ul>
+                    
+                    <div class="bible-verse-highlight">
+                        "When I am afraid, I put my trust in you. In God, whose word I praise—in God I trust and am not afraid. What can mere mortals do to me?" - Psalm 56:3-4
+                    </div>
+                    
+                    <h3>Biblical Examples</h3>
+                    <p>Many biblical figures experienced doubt:</p>
+                    <ul>
+                        <li>Thomas doubted Jesus' resurrection (John 20:24-29)</li>
+                        <li>John the Baptist questioned if Jesus was the Messiah (Matthew 11:2-6)</li>
+                        <li>Elijah felt alone and doubted God's presence (1 Kings 19)</li>
+                    </ul>
+                    
+                    <h3>Practical Steps</h3>
+                    <p>Here are some ways to address doubt:</p>
+                    <ul>
+                        <li><strong>Be honest with God</strong> - God can handle your questions and doubts</li>
+                        <li><strong>Study Scripture</strong> - Look for answers in God's Word</li>
+                        <li><strong>Seek community</strong> - Talk with mature believers who can offer guidance</li>
+                        <li><strong>Consider the evidence</strong> - Explore the historical and logical foundations of faith</li>
+                        <li><strong>Remember past faithfulness</strong> - Reflect on how God has been faithful before</li>
+                    </ul>
+                    
+                    <div class="prayer-suggestion">
+                        "Lord, I bring my doubts before You. You know my heart and my questions. Help me to trust in You even when I don't understand everything. Strengthen my faith and guide me to truth. Amen."
+                    </div>
+                    
+                    <h3>Remember</h3>
+                    <p>Doubt is not the opposite of faith—it's often a sign that you're thinking deeply about your beliefs. The goal is not to eliminate all questions but to learn to trust God even when questions remain.</p>
+                `
+            },
+            2: {
+                title: "Managing Anger and Practicing Forgiveness",
+                content: `
+                    <p>Anger is a natural emotion, but when left unchecked, it can lead to sin and damage relationships. Learning to manage anger and extend forgiveness is essential for spiritual growth and healthy relationships.</p>
+                    
+                    <h3>Understanding Anger</h3>
+                    <p>Anger itself is not sinful—it's how we respond to it that matters. The Bible distinguishes between righteous anger (directed at injustice) and sinful anger (selfish, uncontrolled, or harbored).</p>
+                    
+                    <div class="bible-verse-highlight">
+                        "In your anger do not sin: Do not let the sun go down while you are still angry, and do not give the devil a foothold." - Ephesians 4:26-27
+                    </div>
+                    
+                    <h3>Biblical Examples</h3>
+                    <p>Scripture provides examples of both righteous and unrighteous anger:</p>
+                    <ul>
+                        <li>Jesus' righteous anger at the money changers in the temple (John 2:13-17)</li>
+                        <li>Cain's sinful anger leading to murder (Genesis 4:1-16)</li>
+                        <li>Moses' anger at the Israelites' disobedience (Exodus 32:19-20)</li>
+                    </ul>
+                    
+                    <h3>Practical Steps for Managing Anger</h3>
+                    <ul>
+                        <li><strong>Pause before reacting</strong> - Take time to process your emotions</li>
+                        <li><strong>Identify the root cause</strong> - Often anger masks other emotions like hurt or fear</li>
+                        <li><strong>Express anger appropriately</strong> - Use "I" statements and avoid attacking others</li>
+                        <li><strong>Seek resolution</strong> - Work toward reconciliation rather than escalation</li>
+                        <li><strong>Pray for wisdom</strong> - Ask God to help you respond in a godly way</li>
+                    </ul>
+                    
+                    <h3>The Power of Forgiveness</h3>
+                    <p>Forgiveness is central to the Christian faith. As we have been forgiven by God, we are called to forgive others.</p>
+                    
+                    <div class="bible-verse-highlight">
+                        "Be kind and compassionate to one another, forgiving each other, just as in Christ God forgave you." - Ephesians 4:32
+                    </div>
+                    
+                    <h3>Steps Toward Forgiveness</h3>
+                    <ul>
+                        <li><strong>Acknowledge the hurt</strong> - Don't minimize the pain you've experienced</li>
+                        <li><strong>Make a decision to forgive</strong> - Forgiveness is a choice, not a feeling</li>
+                        <li><strong>Release the debt</strong> - Let go of the right to get even</li>
+                        <li><strong>Pray for the offender</strong> - Ask God to bless them (this can be difficult but transformative)</li>
+                        <li><strong>Seek reconciliation when possible</strong> - Not all relationships can be restored, but we can still forgive</li>
+                    </ul>
+                    
+                    <div class="prayer-suggestion">
+                        "Father, help me to manage my anger in a way that honors You. Teach me to forgive others as You have forgiven me. Replace my bitterness with Your peace and my resentment with Your love. Amen."
+                    </div>
+                    
+                    <h3>Remember</h3>
+                    <p>Forgiveness doesn't mean forgetting or excusing wrongdoing. It means releasing the power that the offense has over you. As you practice forgiveness, you'll experience greater freedom and peace in your life.</p>
+                `
+            },
+            3: {
+                title: "Overcoming Spiritual Apathy",
+                content: `
+                    <p>Spiritual apathy—a lack of interest or enthusiasm for spiritual matters—can creep into our lives gradually. It often manifests as a diminished desire for prayer, Bible reading, worship, or fellowship with other believers.</p>
+                    
+                    <h3>Understanding Spiritual Apathy</h3>
+                    <p>Spiritual apathy can stem from various causes:</p>
+                    <ul>
+                        <li>Busyness and distraction</li>
+                        <li>Unconfessed sin</li>
+                        <li>Disappointment with God</li>
+                        <li>Lack of spiritual disciplines</li>
+                        <li>Comparison with others' spiritual experiences</li>
+                    </ul>
+                    
+                    <div class="bible-verse-highlight">
+                        "Yet I hold this against you: You have forsaken the love you had at first. Consider how far you have fallen! Repent and do the things you did at first." - Revelation 2:4-5
+                    </div>
+                    
+                    <h3>Biblical Examples</h3>
+                    <p>The Bible contains examples of spiritual apathy and renewal:</p>
+                    <ul>
+                        <li>The church in Laodicea (Revelation 3:14-22)</li>
+                        <li>David's prayer for renewal (Psalm 51:10-12)</li>
+                        <li>The prodigal son's return (Luke 15:11-32)</li>
+                    </ul>
+                    
+                    <h3>Practical Steps for Renewal</h3>
+                    <ul>
+                        <li><strong>Examine your heart</strong> - Ask God to reveal what's causing your apathy</li>
+                        <li><strong>Return to basics</strong> - Revisit the fundamental practices that once nurtured your faith</li>
+                        <li><strong>Change your routine</strong> - Sometimes a fresh approach to spiritual disciplines can help</li>
+                        <li><strong>Seek accountability</strong> - Share your struggle with a trusted friend or mentor</li>
+                        <li><strong>Serve others</strong> - Engaging in ministry can rekindle your passion</li>
+                        <li><strong>Practice gratitude</strong> - Focus on God's blessings rather than what's missing</li>
+                    </ul>
+                    
+                    <h3>Reigniting Your Spiritual Life</h3>
+                    <p>Consider these specific practices to overcome apathy:</p>
+                    <ul>
+                        <li><strong>Start a prayer journal</strong> - Write down your prayers and God's responses</li>
+                        <li><strong>Try a different Bible reading plan</strong> - Explore a new approach to Scripture</li>
+                        <li><strong>Attend a retreat or conference</strong> - Immerse yourself in spiritual teaching and worship</li>
+                        <li><strong>Memorize Scripture</strong> - Hide God's Word in your heart</li>
+                        <li><strong>Fast from distractions</strong> - Temporarily eliminate things that compete for your attention</li>
+                    </ul>
+                    
+                    <div class="prayer-suggestion">
+                        "Lord, I confess my spiritual apathy to You. Reignite the passion I once had for You. Help me to see You with fresh eyes and to experience Your presence in new ways. Draw me back to You with Your unfailing love. Amen."
+                    </div>
+                    
+                    <h3>Remember</h3>
+                    <p>Spiritual apathy is not the end of your faith journey. It's often a season that God uses to refine and deepen your relationship with Him. As you take steps toward renewal, trust that God is faithful to meet you and restore your passion for Him.</p>
+                `
+            },
+            4: {
+                title: "Finding Peace in Anxiety",
+                content: `
+                    <p>Anxiety is a common struggle that affects many Christians. While some anxiety is normal, excessive worry can rob us of peace and joy. The Bible offers powerful resources for managing anxiety and finding God's peace.</p>
+                    
+                    <h3>Understanding Anxiety</h3>
+                    <p>Anxiety involves worry about future events or circumstances. It often stems from:</p>
+                    <ul>
+                        <li>Uncertainty about the future</li>
+                        <li>Fear of failure or rejection</li>
+                        <li>Concerns about health, finances, or relationships</li>
+                        <li>Perfectionism or control issues</li>
+                        <li>Past trauma or experiences</li>
+                    </ul>
+                    
+                    <div class="bible-verse-highlight">
+                        "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus." - Philippians 4:6-7
+                    </div>
+                    
+                    <h3>Biblical Examples</h3>
+                    <p>Many biblical figures experienced anxiety:</p>
+                    <ul>
+                        <li>Martha was anxious about preparations (Luke 10:38-42)</li>
+                        <li>David expressed anxiety in many psalms (Psalm 13, 42, 55)</li>
+                        <li>Jesus addressed anxiety about daily needs (Matthew 6:25-34)</li>
+                    </ul>
+                    
+                    <h3>Practical Steps for Managing Anxiety</h3>
+                    <ul>
+                        <li><strong>Practice prayer and meditation</strong> - Spend time in God's presence</li>
+                        <li><strong>Focus on Scripture</strong> - Memorize verses about God's peace and provision</li>
+                        <li><strong>Develop healthy thought patterns</strong> - Challenge anxious thoughts with truth</li>
+                        <li><strong>Practice mindfulness</strong> - Stay present rather than worrying about the future</li>
+                        <li><strong>Seek professional help</strong> - Counseling can provide valuable tools for managing anxiety</li>
+                        <li><strong>Establish healthy boundaries</strong> - Learn to say no to excessive commitments</li>
+                        <li><strong>Exercise regularly</strong> - Physical activity can reduce anxiety symptoms</li>
+                    </ul>
+                    
+                    <h3>Biblical Principles for Peace</h3>
+                    <p>Consider these key principles from Scripture:</p>
+                    <ul>
+                        <li><strong>God's sovereignty</strong> - He is in control even when life feels chaotic</li>
+                        <li><strong>God's provision</strong> - He knows your needs and will provide</li>
+                        <li><strong>God's presence</strong> - He is with you in every situation</li>
+                        <li><strong>God's purpose</strong> - He can use even difficult circumstances for good</li>
+                    </ul>
+                    
+                    <div class="prayer-suggestion">
+                        "Father, I bring my anxieties before You. You know my worries and fears. Help me to trust in Your provision and to rest in Your peace. Remind me that You are with me in every situation. Amen."
+                    </div>
+                    
+                    <h3>Remember</h3>
+                    <p>Anxiety doesn't mean you lack faith. It's a human experience that can be managed with God's help. As you practice these steps, you'll develop greater resilience and experience more of God's peace in your life.</p>
+                `
+            },
+            5: {
+                title: "Moving Beyond Guilt",
+                content: `
+                    <p>Guilt can be a heavy burden that weighs down our spirits and hinders our relationship with God. While conviction from the Holy Spirit leads to repentance and freedom, excessive guilt can trap us in a cycle of shame and self-condemnation.</p>
+                    
+                    <h3>Understanding Guilt</h3>
+                    <p>There are two types of guilt:</p>
+                    <ul>
+                        <li><strong>Healthy guilt</strong> - God's conviction that leads to repentance and change</li>
+                        <li><strong>Unhealthy guilt</strong> - Excessive self-condemnation that persists even after forgiveness</li>
+                    </ul>
+                    
+                    <div class="bible-verse-highlight">
+                        "Therefore, there is now no condemnation for those who are in Christ Jesus, because through Christ Jesus the law of the Spirit who gives life has set you free from the law of sin and death." - Romans 8:1-2
+                    </div>
+                    
+                    <h3>Biblical Examples</h3>
+                    <p>Scripture contains examples of guilt and forgiveness:</p>
+                    <ul>
+                        <li>David's guilt after his sin with Bathsheba (Psalm 51)</li>
+                        <li>Peter's guilt after denying Jesus (John 21:15-19)</li>
+                        <li>The woman caught in adultery (John 8:1-11)</li>
+                    </ul>
+                    
+                    <h3>Practical Steps for Overcoming Guilt</h3>
+                    <ul>
+                        <li><strong>Distinguish between conviction and condemnation</strong> - God's conviction leads to life; Satan's condemnation leads to death</li>
+                        <li><strong>Confess your sins to God</strong> - Be specific and honest about your wrongdoing</li>
+                        <li><strong>Receive God's forgiveness</strong> - Believe that His forgiveness is complete</li>
+                        <li><strong>Forgive yourself</strong> - Let go of self-condemnation</li>
+                        <li><strong>Make amends when possible</strong> - Seek reconciliation with those you've wronged</li>
+                        <li><strong>Learn from your mistakes</strong> - Use your experience to grow in wisdom</li>
+                        <li><strong>Focus on God's grace</strong> - Remember that His love is greater than your sin</li>
+                    </ul>
+                    
+                    <h3>The Power of God's Forgiveness</h3>
+                    <p>Understanding God's forgiveness is key to overcoming guilt:</p>
+                    <ul>
+                        <li>God's forgiveness is complete - He removes our sins as far as the east is from the west (Psalm 103:12)</li>
+                        <li>God's forgiveness is based on Christ's sacrifice, not our performance</li>
+                        <li>God's forgiveness includes forgetting our sins - He doesn't hold them against us</li>
+                        <li>God's forgiveness is available for every sin when we confess</li>
+                    </ul>
+                    
+                    <div class="prayer-suggestion">
+                        "Lord, I confess my sins to You and receive Your complete forgiveness. Help me to let go of the guilt that weighs me down. Remind me of Your grace and mercy. Teach me to walk in freedom and confidence as Your beloved child. Amen."
+                    </div>
+                    
+                    <h3>Remember</h3>
+                    <p>Your identity is not defined by your mistakes but by God's love for you. As you embrace His forgiveness, you can move forward with confidence, knowing that His grace is sufficient for you.</p>
+                `
+            },
+            6: {
+                title: "Finding Connection in Loneliness",
+                content: `
+                    <p>Loneliness is a deeply painful experience that affects many people, including Christians. It can occur even when surrounded by others and can impact our emotional, spiritual, and physical well-being.</p>
+                    
+                    <h3>Understanding Loneliness</h3>
+                    <p>Loneliness involves feeling disconnected or isolated, even when physically alone or in a crowd. It can stem from:</p>
+                    <ul>
+                        <li>Life transitions (moving, changing jobs, etc.)</li>
+                        <li>Loss of relationships</li>
+                        <li>Social isolation</li>
+                        <li>Feeling misunderstood or different</li>
+                        <li>Spiritual dryness or distance from God</li>
+                    </ul>
+                    
+                    <div class="bible-verse-highlight">
+                        "The Lord himself goes before you and will be with you; he will never leave you nor forsake you. Do not be afraid; do not be discouraged." - Deuteronomy 31:8
+                    </div>
+                    
+                    <h3>Biblical Examples</h3>
+                    <p>Many biblical figures experienced loneliness:</p>
+                    <ul>
+                        <li>Elijah felt alone in his ministry (1 Kings 19:10)</li>
+                        <li>David expressed loneliness in the Psalms (Psalm 25:16, 142)</li>
+                        <li>Jesus experienced moments of loneliness (Matthew 26:36-46)</li>
+                    </ul>
+                    
+                    <h3>Practical Steps for Overcoming Loneliness</h3>
+                    <ul>
+                        <li><strong>Deepen your relationship with God</strong> - Spend time in prayer and Scripture</li>
+                        <li><strong>Join a small group or Bible study</strong> - Connect with others in meaningful ways</li>
+                        <li><strong>Serve others</strong> - Volunteering can create connections and purpose</li>
+                        <li><strong>Reach out to others</strong> - Initiate contact rather than waiting for others</li>
+                        <li><strong>Be vulnerable</strong> - Share your struggles with trusted friends</li>
+                        <li><strong>Seek professional help</strong> - Counseling can provide support and strategies</li>
+                        <li><strong>Practice self-care</strong> - Take care of your physical and emotional needs</li>
+                    </ul>
+                    
+                    <h3>Finding Community</h3>
+                    <p>Building meaningful connections takes intentionality:</p>
+                    <ul>
+                        <li><strong>Attend church regularly</strong> - Make it a priority to be present</li>
+                        <li><strong>Participate in church activities</strong> - Get involved beyond Sunday services</li>
+                        <li><strong>Host gatherings</strong> - Create opportunities for connection</li>
+                        <li><strong>Join online communities</strong> - Connect with like-minded believers virtually</li>
+                        <li><strong>Be a friend to others</strong> - Sometimes helping others with loneliness helps us too</li>
+                    </ul>
+                    
+                    <div class="prayer-suggestion">
+                        "Father, I bring my loneliness before You. You know my heart's desire for connection. Help me to find meaningful relationships and to experience Your presence in new ways. Remind me that You are always with me, even in my loneliest moments. Amen."
+                    </div>
+                    
+                    <h3>Remember</h3>
+                    <p>Loneliness is a temporary season, not your permanent reality. God created us for connection, and He is faithful to provide the relationships we need. As you take steps toward community, trust that He is working to bring people into your life who will encourage and support you.</p>
+                `
+            },
+            7: {
+                title: "Overcoming Pride",
+                content: `
+                    <p>Pride is often considered the root of all sin. It can manifest in various ways, from arrogance and self-righteousness to subtle forms like comparison and people-pleasing. Overcoming pride is essential for spiritual growth and healthy relationships.</p>
+                    
+                    <h3>Understanding Pride</h3>
+                    <p>Pride involves an excessive focus on self and can take many forms:</p>
+                    <ul>
+                        <li>Arrogance - Looking down on others</li>
+                        <li>Self-righteousness - Trusting in one's own goodness</li>
+                        <li>Comparison - Measuring oneself against others</li>
+                        <li>People-pleasing - Seeking approval from others</li>
+                        <li>Perfectionism - Setting unrealistic standards</li>
+                        <li>Defensiveness - Resisting correction or feedback</li>
+                    </ul>
+                    
+                    <div class="bible-verse-highlight">
+                        "Pride goes before destruction, a haughty spirit before a fall." - Proverbs 16:18
+                    </div>
+                    
+                    <h3>Biblical Examples</h3>
+                    <p>Scripture contains numerous examples of pride and its consequences:</p>
+                    <ul>
+                        <li>Lucifer's fall (Isaiah 14:12-15)</li>
+                        <li>The Tower of Babel (Genesis 11:1-9)</li>
+                        <li>Nebuchadnezzar's pride and humbling (Daniel 4)</li>
+                        <li>The Pharisee and tax collector (Luke 18:9-14)</li>
+                    </ul>
+                    
+                    <h3>Practical Steps for Overcoming Pride</h3>
+                    <ul>
+                        <li><strong>Practice humility</strong> - Consider others better than yourself (Philippians 2:3)</li>
+                        <li><strong>Embrace servanthood</strong> - Look for opportunities to serve others</li>
+                        <li><strong>Accept correction</strong> - Be open to feedback from others</li>
+                        <li><strong>Celebrate others' successes</strong> - Rejoice with those who rejoice</li>
+                        <li><strong>Confess pride regularly</strong> - Ask God to reveal areas of pride in your life</li>
+                        <li><strong>Focus on God's greatness</strong> - Meditate on His attributes rather than your own</li>
+                        <li><strong>Practice gratitude</strong> - Acknowledge that all good things come from God</li>
+                    </ul>
+                    
+                    <h3>The Path to Humility</h3>
+                    <p>Humility is the antidote to pride and involves:</p>
+                    <ul>
+                        <li>Recognizing your dependence on God</li>
+                        <li>Acknowledging your limitations and weaknesses</li>
+                        <li>Valuing others' perspectives and contributions</li>
+                        <li>Being willing to learn from others</li>
+                        <li>Putting others' needs before your own</li>
+                    </ul>
+                    
+                    <div class="prayer-suggestion">
+                        "Lord, I confess my pride to You. Help me to see myself accurately—neither too highly nor too lowly. Teach me the way of humility. Remind me that all I have comes from You. Amen."
+                    </div>
+                    
+                    <h3>Remember</h3>
+                    <p>Overcoming pride is a lifelong journey. As you grow in humility, you'll experience greater freedom, deeper relationships, and a closer walk with God. Remember that God opposes the proud but gives grace to the humble (James 4:6).</p>
+                `
+            },
+            8: {
+                title: "Preventing and Recovering from Burnout",
+                content: `
+                    <p>Burnout is a state of physical, emotional, and spiritual exhaustion that can affect anyone, including those serving in ministry. It often results from prolonged stress, overcommitment, and neglecting self-care.</p>
+                    
+                    <h3>Understanding Burnout</h3>
+                    <p>Burnout can manifest in various ways:</p>
+                    <ul>
+                        <li>Physical exhaustion and fatigue</li>
+                        <li>Emotional numbness or irritability</li>
+                        <li>Spiritual dryness or apathy</li>
+                        <li>Decreased effectiveness in work or ministry</li>
+                        <li>Cynicism or negativity</li>
+                        <li>Difficulty sleeping or concentrating</li>
+                    </ul>
+                    
+                    <div class="bible-verse-highlight">
+                        "Come to me, all you who are weary and burdened, and I will give you rest. Take my yoke upon you and learn from me, for I am gentle and humble in heart, and you will find rest for your souls." - Matthew 11:28-30
+                    </div>
+                    
+                    <h3>Biblical Examples</h3>
+                    <p>Several biblical figures experienced burnout:</p>
+                    <ul>
+                        <li>Moses was overwhelmed by leadership responsibilities (Exodus 18:13-27)</li>
+                        <li>Elijah experienced exhaustion after spiritual victory (1 Kings 19)</li>
+                        <li>Jesus withdrew to rest and pray (Mark 1:35, 6:31)</li>
+                    </ul>
+                    
+                    <h3>Practical Steps for Preventing Burnout</h3>
+                    <ul>
+                        <li><strong>Establish healthy boundaries</strong> - Learn to say no and set limits</li>
+                        <li><strong>Practice Sabbath rest</strong> - Take regular time off for renewal</li>
+                        <li><strong>Delegate responsibilities</strong> - Share the load with others</li>
+                        <li><strong>Maintain spiritual disciplines</strong> - Prioritize time with God</li>
+                        <li><strong>Nurture relationships</strong> - Connect with supportive friends and family</li>
+                        <li><strong>Exercise regularly</strong> - Take care of your physical health</li>
+                        <li><strong>Seek balance</strong> - Ensure variety in your activities</li>
+                    </ul>
+                    
+                    <h3>Recovering from Burnout</h3>
+                    <p>If you're already experiencing burnout, consider these steps:</p>
+                    <ul>
+                        <li><strong>Take a break</strong> - Step away from responsibilities temporarily</li>
+                        <li><strong>Reassess priorities</strong> - Evaluate what truly matters</li>
+                        <li><strong>Simplify your life</strong> - Reduce commitments and activities</li>
+                        <li><strong>Seek support</strong> - Talk with a counselor or trusted friend</li>
+                        <li><strong>Rediscover joy</strong> - Engage in activities that bring life</li>
+                        <li><strong>Rest in God's presence</strong> - Spend time in silence and prayer</li>
+                        <li><strong>Consider a sabbatical</strong> - Take an extended period of rest if possible</li>
+                    </ul>
+                    
+                    <div class="prayer-suggestion">
+                        "Lord, I bring my exhaustion and overwhelm before You. Help me to find rest in Your presence. Teach me to live at a sustainable pace. Show me how to serve from a place of abundance rather than depletion. Amen."
+                    </div>
+                    
+                    <h3>Remember</h3>
+                    <p>Burnout is not a sign of spiritual failure but a signal that something needs to change. God doesn't call us to unsustainable lives of constant activity. As you implement these practices, you'll discover a more balanced and sustainable way of living and serving.</p>
+                `
+            }
+        };
+
+        // DOM Elements for Struggles
+        const struggleCards = document.querySelectorAll('.struggle-card');
+        const struggleModal = document.getElementById('struggle-modal');
+        const struggleModalTitle = document.getElementById('struggle-modal-title');
+        const struggleModalContent = document.getElementById('struggle-modal-content');
+        const closeStruggleModal = document.querySelector('.struggle-modal-close');
+
+        // Event Listeners for Struggles
+        struggleCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const struggleId = this.getAttribute('data-struggle');
+                openStruggleModal(struggleId);
+            });
+        });
+
+        closeStruggleModal.addEventListener('click', function() {
+            struggleModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', function(e) {
+            if (e.target === struggleModal) {
+                struggleModal.style.display = 'none';
+            }
+        });
+
+        // Function to open struggle modal
+        function openStruggleModal(struggleId) {
+            const struggle = strugglesContent[struggleId];
+            struggleModalTitle.textContent = struggle.title;
+            struggleModalContent.innerHTML = struggle.content;
+            struggleModal.style.display = 'flex';
+        }
+    </script>
+</body>
+</html> 
